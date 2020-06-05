@@ -3,11 +3,9 @@ package com.luteflex.microservices.movie;
 
 import com.luteflex.microservices.movie.DataAccess.MovieRepo;
 import com.luteflex.microservices.movie.Models.Movie;
-import com.luteflex.microservices.user.DataAccess.UserRepo;
-import com.luteflex.microservices.user.Models.TokenRequest;
-import com.luteflex.microservices.user.Models.User;
-import com.luteflex.microservices.user.rabbitmq.Receiver;
-import com.luteflex.microservices.user.rabbitmq.Sender;
+
+import java.util.List;
+
 
 public class MovieConfiguration
 {
@@ -31,7 +29,20 @@ public class MovieConfiguration
         movieRepo.create(movie);
 
 
-        return Receiver.gettoken(user.getName()); //return jwt
+        return true;
+    }
+
+    List<Movie> searchMovies(String keyword){
+        return movieRepo.searchMovies(keyword);
+    }
+
+    List<Movie> getMovies(){
+        return movieRepo.getMovies();
+    }
+
+    boolean removeMovie(int id){
+        movieRepo.deleteMovie(id);
+        return true;
     }
 
 }
