@@ -16,8 +16,9 @@ public class MovieConfigurationController
         return new MovieConfiguration().upload(movie);
     }
 
-    @GetMapping(path = "/movie/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Movie> search(@RequestParam String keyword) {
+    @GetMapping(path = "/movie/search/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Movie> search(@PathVariable String keyword) {
+
         return new MovieConfiguration().searchMovies(keyword);
     }
 
@@ -27,9 +28,10 @@ public class MovieConfigurationController
         return new MovieConfiguration().getMovies();
     }
 
-    @DeleteMapping(value = "/movie/{id}")
+    @DeleteMapping(value = "/movie/delete/{id}")
     public boolean deleteImage(@PathVariable int id){
         // Claims claims = JWT.parseJWT(token);
+        System.out.print("eyy delete that shiii");
         return new MovieConfiguration().removeMovie(id);
     }
 }

@@ -31,8 +31,8 @@ public class MovieRepo {
         createEm();
 
         TypedQuery<Movie> query = em.createQuery(
-                "select e from Movie e where e.titel like :keyword", Movie.class);
-        query.setParameter("keyword", keyword);
+                "select e from Movie e where e.titel like :keyword or e.genre like :keyword or e.cast like :keyword", Movie.class);
+        query.setParameter("keyword",  '%' + keyword + '%');
         List<Movie> result = query.setFirstResult(0).setMaxResults(100).getResultList();
         em.clear();
         return result;
